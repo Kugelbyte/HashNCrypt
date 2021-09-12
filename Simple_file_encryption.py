@@ -1,15 +1,18 @@
 import os  
 import os.path  
 import hashlib
+import string
+
 
 def encrypt_file():
-    filename = input("Enter the path to the file: ")   
-    key = int(input("Enter the key: "))
+    filename = input("[+] Enter the path to the file: ")   
+    key = int(input("[+] Enter the key: "))
     if (os.path.isfile(filename)):
     
        with open(filename, 'r') as file:
            result = ''
            lines = file.read()
+           lines = lines.translate(str.maketrans('','',string.punctuation))
            for line in lines:
                for i in range(len(line)):
                    letter = line[i]
@@ -38,7 +41,7 @@ def encrypt_file():
 def encrypt_text():
 
     plaintext = input("[+] Enter the plaintext: ")  
-    key = int(input("Enter the key: "))
+    key = int(input("[+] Enter the key: "))
     result = ''  
     for i in range(len(plaintext)):
         letter = plaintext[i]
@@ -65,24 +68,26 @@ def hash_file():
                     content = file.read()
                     file.close() 
                 hash = hashlib.md5(content.encode())
-                print(hash.hexdigest())
+                print("[+] Hash calculated is ==> " + hash.hexdigest())
+    
 
           case 'sha1':
                 with open(filename, 'r') as file:
                     content = file.read()
                     file.close() 
                 hash = hashlib.sha1(content.encode())
-                print(hash.hexdigest())    
+                print("[+] Hash calculated is ==> " + hash.hexdigest())
+     
     
           case 'sha256':
                 with open(filename, 'r') as file:
                     content = file.read()
                     file.close() 
                 hash = hashlib.sha256(content.encode())
-                print(hash.hexdigest())
+                print("[+] Hash calculated is ==> " + hash.hexdigest())
     
     except:
-      print("[-] Something went wrong. Please try again")
+      print("[-] Something went wrong. Please try again\n")
       hash_file() 
 
 
