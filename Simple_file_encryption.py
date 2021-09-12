@@ -55,7 +55,7 @@ def encrypt_text():
         except:
             print ("[-] Could not encrypt. Invalid plaintext!!\n")
 
-    print(result)
+    return result
 
 
 def hash_file():
